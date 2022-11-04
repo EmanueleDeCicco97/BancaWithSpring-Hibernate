@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Modifica utente</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+ <script src=
+		"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+<style>
+body {
+  background-color: lightblue;
+}
+</style>
+<body>
+	<div class="container">
+	
+		<hr>
+		<h1>Modifica utente</h1>
+
+		<form action="#" th:action="@{/salvaUtente}" th:object="${utente}"
+			method="POST">
+			
+			<!-- Add hidden form field to handle update -->
+			<input type="text" th:field="*{id}" />
+			
+			<input required type="text" th:field="*{nome}" class="form-control mb-4 col-4">
+				
+				<input required type="text" th:field="*{cognome}" class="form-control mb-4 col-4">
+				
+
+				
+				<input type="hidden" th:field="*{cf}" />		
+				
+				<input type="hidden" th:field="*{dataNascita}" />
+				
+				
+				
+		
+				
+				<button type="submit" class="btn btn-info col-2"> Modifica utente</button>
+				
+				
+		</form>
+		
+		<hr>
+		
+		
+		<a th:href = "@{/}" class="w3-button  w3-green"> Torna alla lista degli utenti</a>
+	</div>
+</body>
+</html>

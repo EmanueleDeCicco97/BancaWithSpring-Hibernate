@@ -1,0 +1,75 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Homepage utenti</title>
+
+
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+ <script src=
+		"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+<style>
+body {
+  background-color: lightblue;
+ }
+</style>
+<body>
+<p>Non ti piace questo colore dello sfondo? cambialo!</p>
+   
+    <button type="button" align = "left" onclick="changecolor()">
+       	Cambia colore
+    </button>
+         
+    <script>
+        function changecolor()
+        {
+            
+            var color = "#"+(Math.random()*16777215|0).toString(16);
+              
+            $("body").css("background-color",color);
+        }
+    </script>
+<div align="center">
+
+
+<h1>Lista utenti</h1>
+<a th:href = "@{/showNewUtenteForm}" class="w3-button w3-green"> Aggiungi utente</a>
+
+<a th:href = "@{/inserimentoConto }" class="w3-button w3-green"> Aggiungi conto</a>
+  <table class="w3-table w3-striped w3-border">
+		<thead>
+		<tr>
+		
+				
+				<th> Nome utente </th>
+		  		<th> Cognome utente </th>
+  				<th> Data di nascita </th>
+  				<th> Codice fiscale </th>
+
+  				<th> Azioni utente </th>
+  				
+
+  		</tr>		
+  		</thead>
+  			<tbody>
+  				 
+  				<tr th:each="utente : ${listaUtenti}">
+  					<td th:text="${utente.nome}"></td> 
+  					<td th:text="${utente.cognome}"></td>
+  					<td th:text="${utente.dataNascita}"></td>
+  					<td th:text="${utente.cf}"></td>
+
+  					<td> <a th:href="@{/showModificaUtenteForm/{id}(id=${utente.id})}" class="w3-button w3-blue">Modifica utente</a>
+  					<td> <a th:href="@{/cancellazioneUtente/{id}(id=${utente.id})}" class="w3-button w3-red">Cancella utente</a>
+  					<a th:href = "@{/listaConti/{id}(id=${utente.id})}" class="w3-button w3-green"> Visualizza conti</a>
+  				</tr>
+  			</tbody>
+  </table>
+</div>
+
+</body>
+</html>

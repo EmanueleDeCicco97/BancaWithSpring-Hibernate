@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Inserimento utente</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+ <script src=
+		"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+<style>
+body {
+  background-color: lightblue;
+}
+</style>
+</head>
+<body>
+	<h1>Registrazione Conto</h1>
+
+	<form action="#" th:action="@{/salvaVersamento}" th:object="${conto}"
+	
+		method="POST">
+		<input type="hidden" th:field="*{id}" />
+		Numero conto
+		<input type="text" th:field="*{numeroConto}" class="form-control mb-4 col-4">
+		Quanto vuoi versare?
+		
+		<input required type="number" name="numero" class="form-control mb-4 col-4">  
+		Conto attuale : 
+		<input required type="number" th:field="*{saldo}"  class="form-control mb-4 col-4"> 
+
+<input type="hidden" th:field="*{utentebancario}" />
+	
+	
+						
+
+			
+		<button type="submit" class="btn btn-info col-2">Salva conto</button>
+			
+			<a th:href = "@{/}" class="w3-button  w3-green"> Torna alla lista degli utenti</a>
+			
+			
+
+	</form>
+
+
+
+
+</body>
+</html>

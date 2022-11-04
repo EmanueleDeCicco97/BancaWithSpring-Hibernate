@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Inserimento utente</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+ <script src=
+		"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+<style>
+body {
+  background-color: lightblue;
+}
+</style>
+</head>
+<body>
+	<h1>Registrazione utente Bancario</h1>
+
+	<form action="#" th:action="@{salvaUtente}" th:object="${utente}"
+		method="POST">
+		<input required type="text" th:field="*{nome}" placeholder="Nome utente" class="form-control mb-4 col-4"> 
+		<input required type="text" th:field="*{cognome}" placeholder="Cognome utente" class="form-control mb-4 col-4"> 
+		<input type="date" th:field="*{dataNascita}" class="form-control mb-4 col-4">
+		<input required type="text" th:field="*{cf}" placeholder="Codice fiscale" class="form-control mb-4 col-4">
+		
+
+
+			
+		<button type="submit" class="btn btn-info col-2">Salva utente bancario</button>
+			
+			<a th:href = "@{/}" class="w3-button  w3-green"> Torna alla lista degli utenti</a>
+			
+			
+
+	</form>
+
+
+  <table class="w3-table w3-striped w3-border">
+		<thead>
+		<tr>
+		
+				
+				<th> Nome utente </th>
+		  		<th> Cognome utente </th>
+  				<th> Data di nascita </th>
+  				<th> Tipo di incarico  </th>
+  				<th> id ruolo  </th>
+  				<th> Id ruolo </th>
+  				<th> Azioni utente </th>
+  				
+
+  		</tr>		
+  		</thead>
+  			<tbody>
+  				 
+  				<tr th:each="utente : ${listaRuoli}">
+  				<td th:text="${utente.id}"></td> 
+  					<td th:text="${utente.nomeRuolo}"></td> 
+  					<td th:text="${utente.descrizione}"></td>
+  					<td th:text="${utente.dataScadenzaRuolo}"></td>
+
+  					<td> <a th:href="@{/showModificaUtenteForm/{id}(id=${utente.id})}" class="w3-button w3-blue">Modifica utente</a>
+  					<td> <a th:href="@{/cancellazioneUtente/{id}(id=${utente.id})}" class="w3-button w3-red">Cancella utente</a>
+  				</tr>
+  			</tbody>
+  </table>
+
+</body>
+</html>
