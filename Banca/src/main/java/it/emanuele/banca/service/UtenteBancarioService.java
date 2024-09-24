@@ -6,6 +6,7 @@ import it.emanuele.banca.model.UtenteBancario;
 
 
 public interface UtenteBancarioService {
+
     List<UtenteBancario> getUtentiAttivi();
 
     void salvaUtente(UtenteBancario utente);

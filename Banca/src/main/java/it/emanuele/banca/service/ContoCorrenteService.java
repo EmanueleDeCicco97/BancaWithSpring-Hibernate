@@ -14,5 +14,4 @@ public interface ContoCorrenteService {
 
     void eliminaConto(long id);
 
-
 }

@@ -13,7 +13,6 @@ import it.emanuele.banca.model.UtenteBancario;
 @Repository
 
 public interface ContoCorrenteRepository extends JpaRepository<ContoCorrente, Long> {
-    List<ContoCorrente> findAllByUtentebancarioAndAttivoTrue(UtenteBancario utente);
 
-    Optional<ContoCorrente> findByNumeroConto(String numeroConto);
+    List<ContoCorrente> findAllByUtentebancarioAndAttivoTrue(UtenteBancario utente);
 }

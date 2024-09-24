@@ -17,11 +17,6 @@ public class ContoCorrenteServiceImpl implements ContoCorrenteService {
     private ContoCorrenteRepository contoCorrenteRepository;
 
     @Override
-    public void salvaConto(ContoCorrente conto) {
-        this.contoCorrenteRepository.save(conto);
-    }
-
-    @Override
     public List<ContoCorrente> findAllByUtentebancarioAndAttivoTrue(UtenteBancario utente) {
         return contoCorrenteRepository.findAllByUtentebancarioAndAttivoTrue(utente);
     }
@@ -31,6 +26,11 @@ public class ContoCorrenteServiceImpl implements ContoCorrenteService {
         Optional<ContoCorrente> optional = contoCorrenteRepository.findById(id);
         ContoCorrente conto = optional.get();
         return conto;
+    }
+
+    @Override
+    public void salvaConto(ContoCorrente conto) {
+        this.contoCorrenteRepository.save(conto);
     }
 
     public void eliminaConto(long id) {

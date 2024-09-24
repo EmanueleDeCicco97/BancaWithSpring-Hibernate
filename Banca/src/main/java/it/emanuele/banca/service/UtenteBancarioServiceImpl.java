@@ -16,15 +16,21 @@ public class UtenteBancarioServiceImpl implements UtenteBancarioService {
     private UtenteBancarioRepository utenteBancarioRepository;
 
     @Override
-    public void salvaUtente(UtenteBancario utente) {
-        utenteBancarioRepository.save(utente);
-    }
-
-    @Override
     public UtenteBancario getUtenteById(long id) {
         Optional<UtenteBancario> container = utenteBancarioRepository.findById(id);
         UtenteBancario utente = container.get();
         return utente;
+    }
+
+    @Override
+    public List<UtenteBancario> getUtentiAttivi() {
+
+        return utenteBancarioRepository.findByAttivoTrue();
+    }
+
+    @Override
+    public void salvaUtente(UtenteBancario utente) {
+        utenteBancarioRepository.save(utente);
     }
 
     @Override
@@ -37,9 +43,4 @@ public class UtenteBancarioServiceImpl implements UtenteBancarioService {
         }
     }
 
-    @Override
-    public List<UtenteBancario> getUtentiAttivi() {
-
-        return utenteBancarioRepository.findByAttivoTrue();
-    }
 }

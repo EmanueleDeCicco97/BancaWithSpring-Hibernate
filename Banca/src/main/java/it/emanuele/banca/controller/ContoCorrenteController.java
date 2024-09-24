@@ -17,7 +17,6 @@ import java.util.UUID;
 @Controller
 public class ContoCorrenteController {
 
-
     @Autowired
     private UtenteBancarioService utenteBancarioService;
     @Autowired
@@ -31,7 +30,6 @@ public class ContoCorrenteController {
         model.addAttribute("listaPersone", utenteBancarioService.getUtentiAttivi());
         return "inserimento_conto";
     }
-
 
     @PostMapping("/salvaConto")
     public String salvaConto(ContoCorrente contoCorrente, Model model) {
