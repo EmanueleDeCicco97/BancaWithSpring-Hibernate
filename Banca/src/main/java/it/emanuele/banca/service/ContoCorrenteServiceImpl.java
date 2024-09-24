@@ -10,6 +10,8 @@ import it.emanuele.banca.model.ContoCorrente;
 import it.emanuele.banca.model.UtenteBancario;
 import it.emanuele.banca.repository.ContoCorrenteRepository;
 
+import javax.transaction.Transactional;
+
 @Service
 public class ContoCorrenteServiceImpl implements ContoCorrenteService {
 
@@ -28,11 +30,14 @@ public class ContoCorrenteServiceImpl implements ContoCorrenteService {
         return conto;
     }
 
+    @Transactional
     @Override
     public void salvaConto(ContoCorrente conto) {
         this.contoCorrenteRepository.save(conto);
     }
 
+    @Transactional
+    @Override
     public void eliminaConto(long id) {
         Optional<ContoCorrente> optional = contoCorrenteRepository.findById(id);
         if (optional.isPresent()) {

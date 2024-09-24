@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import it.emanuele.banca.model.UtenteBancario;
 import it.emanuele.banca.repository.UtenteBancarioRepository;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UtenteBancarioServiceImpl implements UtenteBancarioService {
 
@@ -28,11 +30,13 @@ public class UtenteBancarioServiceImpl implements UtenteBancarioService {
         return utenteBancarioRepository.findByAttivoTrue();
     }
 
+    @Transactional
     @Override
     public void salvaUtente(UtenteBancario utente) {
         utenteBancarioRepository.save(utente);
     }
 
+    @Transactional
     @Override
     public void cancellaUtente(long id) {
         Optional<UtenteBancario> optional = utenteBancarioRepository.findById(id);
@@ -42,5 +46,4 @@ public class UtenteBancarioServiceImpl implements UtenteBancarioService {
             utenteBancarioRepository.save(utente);
         }
     }
-
 }
