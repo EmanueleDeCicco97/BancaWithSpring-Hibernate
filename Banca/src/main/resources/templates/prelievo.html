@@ -20,24 +20,26 @@
         .container {
             margin-top: 30px;
         }
+
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1 class="text-center">Registrazione Conto</h1>
+    <h1 class="text-center">Prelievo</h1>
 
     <form action="#" th:action="@{/salvaPrelievo}" th:object="${conto}" method="POST">
         <input type="hidden" th:field="*{id}"/>
 
         <div class="form-group">
             <label for="numeroConto">Numero conto</label>
-            <input type="text" th:field="*{numeroConto}" class="form-control mb-4 col-4" id="numeroConto">
+            <input readonly type="text" th:field="*{numeroConto}" class="form-control mb-4 col-4" id="numeroConto">
         </div>
 
         <div class="form-group">
             <label for="prelievo">Quanto vuoi prelevare?</label>
-            <input required type="number" name="numero" th:max="*{saldo}" class="form-control mb-4 col-4" id="prelievo">
+            <input required type="number" name="numero" th:max="*{saldo}" class="form-control mb-4 col-4" id="prelievo"
+                   min="1">
         </div>
 
         <div class="form-group">
