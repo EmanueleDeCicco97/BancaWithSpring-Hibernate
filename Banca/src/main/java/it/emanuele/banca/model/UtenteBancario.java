@@ -29,8 +29,10 @@ public class UtenteBancario {
 	private Date dataNascita;
 	@Column( name = "cf")
 	private String cf;
-	
-	
+	@Column(name = "attivo")
+	private boolean attivo = true;
+
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="id")
 	
@@ -65,14 +67,21 @@ public class UtenteBancario {
 	public void setCf(String cf) {
 		this.cf = cf;
 	}
+	public boolean isAttivo() {
+		return attivo;
+	}
+	public void setAttivo(boolean attivo) {
+		this.attivo = attivo;
+	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "\nUtenteBancario{" +
+				"id=" + id +
+				", nome='" + nome + '\'' +
+				", cognome='" + cognome + '\'' +
+				", dataNascita=" + dataNascita +
+				", cf='" + cf + '\'' +
+				'}';
+	}
 }

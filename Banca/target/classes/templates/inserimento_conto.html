@@ -1,56 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Inserimento utente</title>
+    <meta charset="ISO-8859-1">
+    <title>Inserimento Conto</title>
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- W3CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
- <script src=
-		"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-    </script>
-<style>
-body {
-  background-color: lightblue;
-}
-</style>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            background-color: lightblue;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-	<h1>Registrazione Conto</h1>
 
-	<form action="#" th:action="@{salvaConto}" th:object="${conto}"
-		method="POST">
-		Inserisci il numero del conto
-		
-		<input required type="text" th:field="*{numeroConto}" placeholder="Numero conto" class="form-control mb-4 col-4"> 
-		Inserisci il saldo
-		<input required type="text" th:field="*{saldo}"  class="form-control mb-4 col-4"> 
-		A quale cliente vuoi associarlo?
-		<select th:field="*{utentebancario}">
+<div class="container">
+    <div th:if="${errorMessage}" class="alert alert-danger">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <h1 class="text-center mb-4">Registrazione Conto</h1>
 
- 		 <option th:each ="persona : ${listaPersone}" th:value="${persona.id}" th:text="${persona.nome}"></option>
-		
-		</select>	
-	
-	<br>
-						
+    <form action="#" th:action="@{/salvaConto}" th:object="${conto}" method="POST">
 
-			
-		<button type="submit" class="btn btn-info col-2">Salva conto</button>
-			
-			<a th:href = "@{/}" class="w3-button  w3-green"> Torna alla lista degli utenti</a>
-			
-			
+        <!-- Saldo -->
+        <div class="form-group row">
+            <label for="saldo" class="col-sm-3 col-form-label">Saldo iniziale:</label>
+            <div class="col-sm-6">
+                <input required type="number" th:field="*{saldo}" placeholder="Saldo" id="saldo" class="form-control"/>
+            </div>
+        </div>
 
-	</form>
+        <!-- Utente Bancario -->
+        <div class="form-group row">
+            <label for="utentebancario" class="col-sm-3 col-form-label">Cliente associato:</label>
+            <div class="col-sm-6">
+                <select th:field="*{utentebancario}" id="utentebancario" class="form-control" required>
+                    <option value="" selected>Seleziona utente</option> <!-- Opzione predefinita -->
+                    <option th:each="persona : ${listaPersone}"
+                            th:value="${persona.id}"
+                            th:text="${persona.nome} + ' ' + ${persona.cognome} + ' (' + ${#dates.format(persona.dataNascita, 'dd/MM/yyyy')} + ')'"/>
+                </select>
 
+            </div>
+        </div>
 
+        <!-- Pulsanti -->
+        <div class="form-group row">
+            <div class="col-sm-6 offset-sm-3">
+                <button type="submit" class="btn btn-info btn-block">Salva conto</button>
+            </div>
+        </div>
+    </form>
 
+    <!-- Link Torna alla lista degli utenti -->
+    <div class="text-center mt-4">
+        <a th:href="@{/}" class="btn btn-success">Torna alla lista degli utenti</a>
+    </div>
+</div>
 
 </body>
 </html>

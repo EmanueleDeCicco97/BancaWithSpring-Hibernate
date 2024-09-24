@@ -9,45 +9,36 @@ import org.springframework.stereotype.Service;
 import it.emanuele.banca.model.ContoCorrente;
 import it.emanuele.banca.model.UtenteBancario;
 import it.emanuele.banca.repository.ContoCorrenteRepository;
+
 @Service
-public class ContoCorrenteServiceImpl implements ContoCorrenteService{
+public class ContoCorrenteServiceImpl implements ContoCorrenteService {
 
-	
-	@Autowired
-	private ContoCorrenteRepository contRep;	
-	
-	@Override
-	public List<ContoCorrente> getAllConti() {
-		// TODO Auto-generated method stub
-		return contRep.findAll();
-	}
+    @Autowired
+    private ContoCorrenteRepository contoCorrenteRepository;
 
-	@Override
-	public void salvaConto(ContoCorrente conti) {
-		// TODO Auto-generated method stub
-		this.contRep.save(conti);
-		
-	}
+    @Override
+    public void salvaConto(ContoCorrente conto) {
+        this.contoCorrenteRepository.save(conto);
+    }
 
-	@Override
-	public List<ContoCorrente> findAllContiByUtentebancario(UtenteBancario utente) {
-		// TODO Auto-generated method stub
-		
-		return contRep.findAllContiByUtentebancario(utente);
-		//java capisce che stai facendo un find all my l'attributo
-		//della classe (in questo caso utentebancario
-	}
+    @Override
+    public List<ContoCorrente> findAllByUtentebancarioAndAttivoTrue(UtenteBancario utente) {
+        return contoCorrenteRepository.findAllByUtentebancarioAndAttivoTrue(utente);
+    }
 
-	@Override
-	public ContoCorrente getContiById(long id) {
-		Optional<ContoCorrente> optional = contRep.findById(id);
-		ContoCorrente conto = null;
-	
-			
-			conto = optional.get();
+    @Override
+    public ContoCorrente getContiById(long id) {
+        Optional<ContoCorrente> optional = contoCorrenteRepository.findById(id);
+        ContoCorrente conto = optional.get();
+        return conto;
+    }
 
-
-		return conto;
-	}
-
+    public void eliminaConto(long id) {
+        Optional<ContoCorrente> optional = contoCorrenteRepository.findById(id);
+        if (optional.isPresent()) {
+            ContoCorrente conto = optional.get();
+            conto.setAttivo(false);
+            contoCorrenteRepository.save(conto);
+        }
+    }
 }

@@ -10,40 +10,36 @@ import it.emanuele.banca.model.UtenteBancario;
 import it.emanuele.banca.repository.UtenteBancarioRepository;
 
 @Service
-public class UtenteBancarioServiceImpl implements UtenteBancarioService{
+public class UtenteBancarioServiceImpl implements UtenteBancarioService {
 
-	@Autowired
-	private UtenteBancarioRepository utBan;
-	
-	@Override
-	public List<UtenteBancario> getAllUtenti() {
-		// TODO Auto-generated method stub
-		return utBan.findAll();
-		
-	}
+    @Autowired
+    private UtenteBancarioRepository utenteBancarioRepository;
 
-	@Override
-	public void salvaUtente(UtenteBancario utente) {
-		// TODO Auto-generated method stub
-		
-		this.utBan.save(utente);
-	}
+    @Override
+    public void salvaUtente(UtenteBancario utente) {
+        utenteBancarioRepository.save(utente);
+    }
 
-	@Override
-	public UtenteBancario getUtenteById(long id) {
-		// TODO Auto-generated method stub
-		Optional<UtenteBancario> container = utBan.findById(id);
-		UtenteBancario utente = null;
-	
-		utente = container.get();
-		return utente;
+    @Override
+    public UtenteBancario getUtenteById(long id) {
+        Optional<UtenteBancario> container = utenteBancarioRepository.findById(id);
+        UtenteBancario utente = container.get();
+        return utente;
+    }
 
-	}
+    @Override
+    public void cancellaUtente(long id) {
+        Optional<UtenteBancario> optional = utenteBancarioRepository.findById(id);
+        if (optional.isPresent()) {
+            UtenteBancario utente = optional.get();
+            utente.setAttivo(false);
+            utenteBancarioRepository.save(utente);
+        }
+    }
 
-	@Override
-	public void cancellaUtenteById(long id) {
-		// TODO Auto-generated method stub
-		this.utBan.deleteById(id);
-	}
+    @Override
+    public List<UtenteBancario> getUtentiAttivi() {
 
+        return utenteBancarioRepository.findByAttivoTrue();
+    }
 }

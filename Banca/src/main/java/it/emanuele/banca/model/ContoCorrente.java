@@ -10,56 +10,71 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table( name =  "conto_corrente")
+@Table(name = "conto_corrente")
 public class ContoCorrente {
 
-	
-	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	@Column ( name = "numero_conto",unique = true)
-	private String numeroConto;
-	@Column ( name = "saldo")
-	private double saldo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-	@ManyToOne
-	@JoinColumn(name="id_correntista",nullable = false)
-	private UtenteBancario utentebancario;
+    @Column(name = "numero_conto", unique = true)
+    private String numeroConto;
+    @Column(name = "saldo")
+    private double saldo;
+    @Column(name = "attivo")
+    private boolean attivo = true;
 
-	public long getId() {
-		return id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "id_correntista", nullable = false)
+    private UtenteBancario utentebancario;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getNumeroConto() {
-		return numeroConto;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setNumeroConto(String numeroConto) {
-		this.numeroConto = numeroConto;
-	}
+    public String getNumeroConto() {
+        return numeroConto;
+    }
 
-	public double getSaldo() {
-		return saldo;
-	}
+    public void setNumeroConto(String numeroConto) {
+        this.numeroConto = numeroConto;
+    }
 
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
-	}
+    public double getSaldo() {
+        return saldo;
+    }
 
-	public UtenteBancario getUtentebancario() {
-		return utentebancario;
-	}
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
 
-	public void setUtentebancario(UtenteBancario utentebancario) {
-		this.utentebancario = utentebancario;
-	}
-	
-	
-	
-	
+    public UtenteBancario getUtentebancario() {
+        return utentebancario;
+    }
+
+    public void setUtentebancario(UtenteBancario utentebancario) {
+        this.utentebancario = utentebancario;
+    }
+
+    public boolean isAttivo() {
+        return attivo;
+    }
+
+    public void setAttivo(boolean attivo) {
+        this.attivo = attivo;
+    }
+
+    @Override
+    public String toString() {
+        return "\nContoCorrente{" +
+                "id=" + id +
+                ", numeroConto='" + numeroConto + '\'' +
+                ", saldo=" + saldo +
+                ", utentebancario=" + utentebancario +
+                '}';
+    }
 }
