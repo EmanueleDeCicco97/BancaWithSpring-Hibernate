@@ -37,8 +37,6 @@ public class UtenteBancarioController {
         return "nuovo_utente";
     }
 
-
-    // Metodo per mostrare il form di modifica
     @GetMapping("/showModificaUtenteForm/{id}")
     public String showModificaUtenteForm(@PathVariable(value = "id") long id, Model model) {
         UtenteBancario utente = utenteService.getUtenteById(id);
@@ -46,7 +44,6 @@ public class UtenteBancarioController {
         return "modifica_utente";
     }
 
-    // Metodo per salvare le modifiche
     @PostMapping("/salvaUtente")
     public String salvaUtente(@ModelAttribute("utente") UtenteBancario utente) {
         utenteService.salvaUtente(utente);
@@ -66,7 +63,6 @@ public class UtenteBancarioController {
         utenteService.cancellaUtente(id);
         return "redirect:/";
     }
-
 
     @GetMapping("/listaConti/{id}")
     public String listaConti(@PathVariable(value = "id") long id, Model model) {
