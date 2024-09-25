@@ -33,7 +33,7 @@ public class ContoCorrenteServiceImpl implements ContoCorrenteService {
     @Transactional
     @Override
     public void salvaConto(ContoCorrente conto) {
-        this.contoCorrenteRepository.save(conto);
+        contoCorrenteRepository.save(conto);
     }
 
     @Transactional

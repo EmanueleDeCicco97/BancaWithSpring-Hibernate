@@ -24,9 +24,11 @@ public class ContoCorrente {
     @Column(name = "attivo")
     private boolean attivo = true;
 
+
     @ManyToOne
     @JoinColumn(name = "id_correntista", nullable = false)
     private UtenteBancario utentebancario;
+
 
     public long getId() {
         return id;

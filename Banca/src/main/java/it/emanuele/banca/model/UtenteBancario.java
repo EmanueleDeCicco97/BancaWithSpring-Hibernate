@@ -1,6 +1,7 @@
 package it.emanuele.banca.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,8 +34,9 @@ public class UtenteBancario {
     private boolean attivo = true;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
     @JoinColumn(name = "id")
+    private List<ContoCorrente> listaConti;
 
 
     public long getId() {
@@ -83,6 +85,14 @@ public class UtenteBancario {
 
     public void setAttivo(boolean attivo) {
         this.attivo = attivo;
+    }
+
+    public List<ContoCorrente> getListaConti() {
+        return listaConti;
+    }
+
+    public void setListaConti(List<ContoCorrente> listaConti) {
+        this.listaConti = listaConti;
     }
 
     @Override
