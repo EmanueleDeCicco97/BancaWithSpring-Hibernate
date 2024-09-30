@@ -34,8 +34,7 @@ public class UtenteBancario {
     private boolean attivo = true;
 
 
-    @OneToMany
-    @JoinColumn(name = "id")
+    @OneToMany(mappedBy = "utentebancario", cascade = CascadeType.ALL)
     private List<ContoCorrente> listaConti;
 
 
