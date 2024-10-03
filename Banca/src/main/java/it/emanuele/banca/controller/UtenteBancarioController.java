@@ -49,22 +49,20 @@ public class UtenteBancarioController {
     @PostMapping("/salvaUtente")
     public String salvaUtente(@ModelAttribute("utente") UtenteBancario utente, Model model) {
 
-        Date dataNascita = utente.getDataNascita(); // Assumendo che tu abbia un metodo getDataNascita()
-
-        // Calcola l'anno di nascita
+        Date dataNascita = utente.getDataNascita();
+        // calcolo l'anno di nascita
         int annoNascita = dataNascita.getYear() + 1900; // getYear() restituisce l'anno a partire dal 1900
-        int eta = LocalDate.now().getYear() - annoNascita;
 
-        // Controlla se l'utente ha meno di 18 anni o è nato dopo il 2006
-        if (eta < 18 || annoNascita > 2006) {
-            model.addAttribute("errorMessage", "L'utente deve avere almeno 18 anni e non deve essere nato dopo il 2006.");
-            return "nuovo_utente"; // Indica la pagina di inserimento con l'errore
+        // controllo che l'anno di nascita non deve essere maggiore del 2006
+        if (annoNascita > (LocalDate.now().getYear() - 18)) {
+            model.addAttribute("errorMessage", "L'utente deve avere almeno 18 anni.");
+            return "nuovo_utente";
         }
 
-        // Controllo per persone troppo vecchie
-        if (annoNascita < 1904) {
+        // controllo per persone troppo vecchie non deve essere minore del 1904
+        if (annoNascita < (LocalDate.now().getYear() - 120)) {
             model.addAttribute("errorMessage", "L'utente non può avere più di 120 anni.");
-            return "nuovo_utente"; // Indica la pagina di inserimento con l'errore
+            return "nuovo_utente";
         }
         utenteService.salvaUtente(utente);
         return "redirect:/";
