@@ -13,6 +13,8 @@ import it.emanuele.banca.model.UtenteBancario;
 import it.emanuele.banca.service.ContoCorrenteService;
 import it.emanuele.banca.service.UtenteBancarioService;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -45,7 +47,25 @@ public class UtenteBancarioController {
     }
 
     @PostMapping("/salvaUtente")
-    public String salvaUtente(@ModelAttribute("utente") UtenteBancario utente) {
+    public String salvaUtente(@ModelAttribute("utente") UtenteBancario utente, Model model) {
+
+        Date dataNascita = utente.getDataNascita(); // Assumendo che tu abbia un metodo getDataNascita()
+
+        // Calcola l'anno di nascita
+        int annoNascita = dataNascita.getYear() + 1900; // getYear() restituisce l'anno a partire dal 1900
+        int eta = LocalDate.now().getYear() - annoNascita;
+
+        // Controlla se l'utente ha meno di 18 anni o è nato dopo il 2006
+        if (eta < 18 || annoNascita > 2006) {
+            model.addAttribute("errorMessage", "L'utente deve avere almeno 18 anni e non deve essere nato dopo il 2006.");
+            return "nuovo_utente"; // Indica la pagina di inserimento con l'errore
+        }
+
+        // Controllo per persone troppo vecchie
+        if (annoNascita < 1904) {
+            model.addAttribute("errorMessage", "L'utente non può avere più di 120 anni.");
+            return "nuovo_utente"; // Indica la pagina di inserimento con l'errore
+        }
         utenteService.salvaUtente(utente);
         return "redirect:/";
     }

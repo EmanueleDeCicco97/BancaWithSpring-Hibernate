@@ -25,6 +25,11 @@
 <body>
 
 <div class="container">
+
+    <!-- Messaggio di errore -->
+    <div th:if="${errorMessage}" class="alert alert-danger">
+        <p th:text="${errorMessage}"></p>
+    </div>
     <h1 class="text-center mb-4">Registrazione utente Bancario</h1>
 
     <form action="#" th:action="@{/salvaUtente}" th:object="${utente}" method="POST">
